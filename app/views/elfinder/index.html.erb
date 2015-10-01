@@ -1,0 +1,47 @@
+<% unless signed_in?  %>
+Access denied    
+<% else %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Manager</title>
+<%= stylesheet_link_tag "jquery-ui/1.9.2/jquery-ui" %>
+<%= javascript_include_tag "jquery-2.1.0.min"%>
+<%= javascript_include_tag "jquery-ui/1.9.2/jquery-ui.min"%>
+  <%= javascript_include_tag "elfinder/elfinder.min"%>
+  <%= javascript_include_tag "elfinder/proxy/elFinderSupportVer1"%>
+  <%= stylesheet_link_tag "elfinder/elfinder.min" %>
+  <%= stylesheet_link_tag "elfinder/theme" %>
+
+</head>
+<body>
+
+<div id="elfinder"></div>
+
+<script type="text/javascript" charset="utf-8">
+    // Helper function to get parameters from the query string.
+    function getUrlParam(paramName) {
+        var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
+        var match = window.location.search.match(reParam) ;
+
+        return (match && match.length > 1) ? match[1] : '' ;
+    }
+
+    $().ready(function() {
+        var funcNum = getUrlParam('CKEditorFuncNum');
+
+        var elf = $('#elfinder').elfinder({
+            url : '/elfinder',
+            transport : new elFinderSupportVer1(),
+            getFileCallback : function(file) {
+                window.opener.CKEDITOR.tools.callFunction(funcNum, file.url);
+                window.close();
+            },
+            resizable: false
+        }).elfinder('instance');
+    });
+</script>
+</body>
+</html>
+<% end %>

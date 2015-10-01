@@ -35,3 +35,9 @@ group :production do
   gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
+
+gem "wysiwyg-rails"
+gem 'font-awesome-sass'
+
+gem 'ckeditor'
+gem 'el_finder', '1.1.12'

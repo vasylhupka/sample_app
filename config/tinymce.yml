@@ -1,0 +1,13 @@
+toolbar:
+  - styleselect | bold italic | undo redo
+  - image | link | table | fullscreen | media | code | textcolor
+plugins:
+  - image
+  - link
+  - table
+  - fullscreen
+  - media
+  - bbcode
+  - code
+  - textcolor
+
